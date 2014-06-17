@@ -13,5 +13,8 @@
   <class name="std::vector<JetCorrectorParametersCollection>"/>
   <class name="SimpleJetCorrectionUncertainty"/>
   <class name="SimpleJetCorrector"/>
+  <class name="SimpleJetResolution"/>
+  <class name="JetResolution"/>
 </selection>
 </lcgdict>
+
