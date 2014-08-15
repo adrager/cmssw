@@ -12,9 +12,17 @@ int NPU=20;
   ////////////// Construct the JetCorrectorParameters objects ///////////////////////
 
   string L1Tag    = "../data/JetResolutionInput.txt"; 
+  string ak5CHSTag = "../data/JetResolutionInputAK5PFCHS.txt"; 
+  string ak5Tag = "../data/JetResolutionInputAK5PF.txt"; 
   JetCorrectorParameters *L1Par    = new JetCorrectorParameters(L1Tag);
+  JetCorrectorParameters *AK5PFCHSPar    = new JetCorrectorParameters(ak5CHSTag);
+  JetCorrectorParameters *AK5PFPar    = new JetCorrectorParameters(ak5Tag);
   cout<<"L1Par isValid:"<<L1Par->isValid()<<endl;
   cout<<"L1Par size:"<<L1Par->size()<<endl;
+    cout<<"AK5PFCHSPar isValid:"<<AK5PFCHSPar->isValid()<<endl;
+  cout<<"AK5PFCHSPar size:"<<AK5PFCHSPar->size()<<endl;
+    cout<<"AK5PFPar isValid:"<<AK5PFPar->isValid()<<endl;
+  cout<<"AK5PFPar size:"<<AK5PFPar->size()<<endl;
 //  cout<<"L1Par printScreen:"<<L1Par->printScreen()<<endl;
   ////////////// Construct a FactorizedJetCorrector object //////////////////////
   SimpleJetCorrector *JetUncertainty = new SimpleJetCorrector(*L1Par);
@@ -22,10 +30,14 @@ int NPU=20;
   ////////////// Loop over jets //////////////////////
   std::vector<float> fx, fY;
   fx.push_back(0.04);  // Jet Eta
-  fY.push_back(100); // Jet PT
-  fY.push_back(30); // Number of truth pileup
+  fY.push_back(50); // Jet PT
+  fY.push_back(35); // Number of truth pileup
   SimpleJetResolution *resolution =  new SimpleJetResolution(*L1Par);
   cout<<"Jet pT=: "<<fY[0]<<" GeV, Number of Truth pielup: "<<fY[1]<<" eta: "<<fx[0]<<" resoltuion: "<<resolution->resolution(fx,fY)<<endl; // get resolution 
+  SimpleJetResolution *ak5PFResolution =  new SimpleJetResolution(*AK5PFPar);
+  cout<<"ak5PFResolution Jet pT=: "<<fY[0]<<" GeV, Number of Truth pielup: "<<fY[1]<<" eta: "<<fx[0]<<" resoltuion: "<<ak5PFResolution->resolution(fx,fY)<<endl; // get resolution 
+    SimpleJetResolution *ak5PFCHSResolution =  new SimpleJetResolution(*AK5PFCHSPar);
+  cout<<"ak5PFCHSResolution Jet pT=: "<<fY[0]<<" GeV, Number of Truth pielup: "<<fY[1]<<" eta: "<<fx[0]<<" resoltuion: "<<ak5PFCHSResolution->resolution(fx,fY)<<endl; // get resolution 
 //  cout<<"Correction applied to JPT jet after L1Offset = "<<vcor[0]<<endl;
 //  cout<<"Correction applied to JPT jet after L1JPTOffset = "<<vcor[1]<<endl;
 }
