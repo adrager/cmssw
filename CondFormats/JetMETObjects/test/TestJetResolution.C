@@ -21,11 +21,11 @@ int NPU=20;
 //  JetUncertainty->setJetEta(0.4);
   ////////////// Loop over jets //////////////////////
   std::vector<float> fx, fY;
-  fx.push_back(0.04);
-  fY.push_back(100);
-  fY.push_back(10);
+  fx.push_back(0.04);  // Jet Eta
+  fY.push_back(100); // Jet PT
+  fY.push_back(30); // Number of truth pileup
   SimpleJetResolution *resolution =  new SimpleJetResolution(*L1Par);
-  cout<<"SimpleJetResolution->resolution(): "<<resolution->resolution(fx,fY)<<endl;  
+  cout<<"Jet pT=: "<<fY[0]<<" GeV, Number of Truth pielup: "<<fY[1]<<" eta: "<<fx[0]<<" resoltuion: "<<resolution->resolution(fx,fY)<<endl; // get resolution 
 //  cout<<"Correction applied to JPT jet after L1Offset = "<<vcor[0]<<endl;
 //  cout<<"Correction applied to JPT jet after L1JPTOffset = "<<vcor[1]<<endl;
 }
